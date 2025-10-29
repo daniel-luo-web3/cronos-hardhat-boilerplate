@@ -1,19 +1,29 @@
 {
-    "name": "cronos-hardhat-boilerplate",
-    "version": "1.0.0",
-    "description": "## Note",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "MIT",
-    "dependencies": {
-        "@openzeppelin/contracts": "^5.0.1",
-        "dotenv": "^16.3.1"
-    },
-    "devDependencies": {
-        "@nomicfoundation/hardhat-toolbox": "^4.0.0",
-        "hardhat": "^2.19.4"
-    }
+  "name": "cronos-hardhat3-boilerplate",
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ignition": "^3.0.3",
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.0",
+    "@types/chai": "^4.3.20",
+    "@types/chai-as-promised": "^8.0.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.18.12",
+    "chai": "^5.3.3",
+    "ethers": "^6.15.0",
+    "forge-std": "github:foundry-rs/forge-std#v1.9.4",
+    "hardhat": "^3.0.9",
+    "mocha": "^11.7.4",
+    "typescript": "~5.8.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.1.0",
+    "dotenv": "^16.4.0"
+  },
+  "scripts": {
+    "build": "npx hardhat clean && tsc && npx hardhat compile",
+    "test": "npm run build && npx hardhat test",
+    "verify-cronos-token": "npx hardhat ignition verify --network cronosTestnet chain-338",
+    "deploy-cronos-token": "npm run build && npx hardhat run dist/scripts/DeployMyERC20.script.ts.js --network cronosTestnet"
+  }
 }

@@ -1,11 +1,9 @@
 // To run this test
 // npx hardhat test
-import {
-    time,
-    loadFixture,
-} from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import hre from "hardhat";
+
+const { ethers, networkHelpers } = await hre.network.connect();
 
 describe("MyERC20 basic test", function () {
     // We define a fixture to reuse the same setup in every test.
@@ -42,7 +40,7 @@ describe("MyERC20 basic test", function () {
     describe("Checks that things are set-up", function () {
         it("Roles have been setup", async function () {
             const { erc20Instance, address_owner, address_minter } =
-                await loadFixture(deployERC20Fixture);
+                await networkHelpers.loadFixture(deployERC20Fixture);
             const controllerRole = await erc20Instance.getControllerRole();
             console.log("controllerRole", controllerRole);
             const ownerHasControllerRole = await erc20Instance.hasRole(
@@ -57,7 +55,7 @@ describe("MyERC20 basic test", function () {
             expect(minterHasControllerRole).to.be.true;
         });
         it("Tokens have been minted", async function () {
-            const { erc20Instance, address_user1 } = await loadFixture(
+            const { erc20Instance, address_user1 } = await networkHelpers.loadFixture(
                 deployERC20Fixture
             );
             const user1BalanceBN = await erc20Instance.balanceOf(address_user1);

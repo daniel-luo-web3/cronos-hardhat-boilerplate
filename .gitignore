@@ -15,3 +15,22 @@ artifacts
 .env
 .DS_Store
 .vscode
+dist
+
+# pnpm deploy output
+/bundle
+
+# Hardhat Build Artifacts
+/artifacts
+
+# Hardhat compilation (v2) support directory
+/cache
+
+# Typechain output
+/types
+
+# Hardhat coverage reports
+/coverage
+
+# Ignition deployments
+/ignition/deployments

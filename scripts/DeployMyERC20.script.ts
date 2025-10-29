@@ -1,13 +1,13 @@
 // To run the script
 // npx hardhat run scripts/DeployMyERC20.script.ts --network [network name]
 
-import { run, ethers } from "hardhat";
 import hre from "hardhat";
+
+const { ethers } = await hre.network.connect();
 
 const contractName = "MyERC20";
 
 async function main() {
-    await run("compile");
 
     const accounts = await ethers.getSigners();
 
@@ -16,10 +16,9 @@ async function main() {
         accounts.map((a) => a.address)
     );
 
-    const myContract = await hre.ethers.getContractFactory(contractName);
+    const myContract = await ethers.getContractFactory(contractName);
     const contractInstance = await myContract.deploy(
-        "My token name",
-        "My token symbol"
+        "Cronos Token", "CRT"
     );
 
     await contractInstance.waitForDeployment();
