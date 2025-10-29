@@ -1,1 +1,1 @@
-module.exports = ["My token name", "My token symbol"];
+module.exports = ["Cronos Token", "CRT"];
