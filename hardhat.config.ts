@@ -41,7 +41,7 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    cronosMainnet: {
+    cronos: {
       chainId: 25,
       type: "http",
       url: "https://evm.cronos.org/",
