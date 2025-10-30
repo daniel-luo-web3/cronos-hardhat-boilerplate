@@ -35,11 +35,8 @@ npx hardhat compile
 Execute the test script, and then calculate the test coverage of the smart contract code:
 
 ```bash
-npx hardhat test
-npx hardhat coverage
+npx hardhat test --coverage
 ```
-
-The test also incluces a gas report when the .env file includes: `REPORT_GAS=true npx hardhat test`.
 
 Deploy the smart contract to the local blockchain network:
 
@@ -61,7 +58,16 @@ Cronos Mainnet:
 npx hardhat run scripts/DeployMyERC20.script.ts --network cronos
 ```
 
-Don't forget to note the address of the contract after deployment.
+**Alternatively**, Hardhat3 provides [hardhat ignition](https://v2.hardhat.org/ignition/docs/getting-started#overview) for easier smart contract deployment without writing traditional scripts as *scripts/DeployMyERC20.script.ts*. Kindly exec command:
+
+```bash
+npx hardhat ignition deploy ignition/modules/MyERC20.ts --network cronosTestnet
+```
+
+*Tips: Hardhat Ignition is a new declarative deployment system that provides traceable and reusable smart contract deployment workflows. It replaces traditional script-based deployments, making the process safer, more reproducible, and capable of automatically handling dependencies, parameters, and library linking.*
+
+
+**Don't forget to note the address of the contract after deployment.**
 
 ## Contract verification on the block explorer
 
@@ -72,16 +78,10 @@ For contract verification, you need an API key for the Explorer API. Here are th
 
 Contract verification requires custom chain configuration in `hardhat.config.ts`. See the `hardhat.config.ts` file in this repository for Cronos testnet and mainnet configurations.
 
-To see the list of supported blockchain network for contract verification:
-
-```
-npx hardhat verify --list-networks
-```
-
 Verify on Cronos Testnet by including the constructor's arguments in the command line:
 
 ```shell
-npx hardhat verify --network cronosTestnet "DEPLOYED_CONTRACT_ADDRESS" "My token name" "My token symbol"
+npx hardhat verify --network cronosTestnet "DEPLOYED_CONTRACT_ADDRESS" "Cronos Token" "CRT"
 ```
 
 Of, if the constructor's arguments have been saved in the "./scripts/deploy-verification-arguments.js" file:
@@ -96,9 +96,8 @@ Verify on Cronos Mainnet:
 npx hardhat verify --network cronos "DEPLOYED_CONTRACT_ADDRESS" "Constructor argument 1" "Constructor argument 2"
 ```
 
-## Deployment and verification on Ethereum Sepolia testnet
+**Alternatively**, for convenience, we could even complete `verify` along with deployment:
 
 ```bash
-npx hardhat run scripts/DeployMyERC20.script.ts --network ethereumSepoliaTestnet
-npx hardhat verify --network ethereumSepoliaTestnet "DEPLOYED_CONTRACT_ADDRESS" "My token name" "My token symbol"
+npx hardhat ignition deploy ignition/modules/MyERC20.ts --network cronosTestnet --verify                    
 ```
