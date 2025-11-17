@@ -24,7 +24,7 @@
     "build": "npx hardhat clean && tsc && npx hardhat compile",
     "test": "npm run build && npx hardhat test",
     "deploy-cronos-token": "npm run build && npx hardhat run dist/scripts/DeployMyERC20.script.js --network cronosTestnet",
-    "verify-cronos-token": "npx hardhat verify --network cronosTestnet --constructor-args-path ./scripts/deploy-verification-arguments.ts --contract 'contracts/MyERC20.sol:MyERC20' 0x0102925299f8177D295ddA6c2fC6e73Bcb00DfC2",
+    "verify-cronos-token": "npm run build && npx hardhat verify --network cronosTestnet --constructor-args-path ./scripts/deploy-verification-arguments.ts --contract 'contracts/MyERC20.sol:MyERC20' 0xDcd0BB0C726e3284CfB747645d523Cf6E32D5792",
     "deploy-cronos-token-ignition": "npm run build && npx hardhat ignition deploy ignition/modules/MyERC20.ts --network cronosTestnet",
     "verify-cronos-token-ignition": "npx hardhat ignition verify --network cronosTestnet chain-338"
   }
